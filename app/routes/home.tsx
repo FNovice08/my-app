@@ -156,10 +156,12 @@ export default function Home() {
       </nav>
 
       {/* Hero Section (Carousel) */}
-      <HeroCarousel />
+      <div className="bg-white">
+        <HeroCarousel />
+      </div>
 
       {/* Vision & Mission */}
-      <section className="w-full max-w-4xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 animate-fade-in-up delay-200 text-center">
+      <section className="w-full max-w-4xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 animate-fade-in-up delay-200 text-center bg-blue-50 rounded-3xl shadow-md">
         <div>
           <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'Our Vision' : '我们的愿景'}</h2>
           <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].vision}</p>
@@ -171,13 +173,13 @@ export default function Home() {
       </section>
 
       {/* About Us */}
-      <section id="about" className="w-full max-w-3xl mx-auto py-12 px-4 text-center animate-fade-in-up delay-300">
+      <section id="about" className="w-full max-w-3xl mx-auto py-12 px-4 text-center animate-fade-in-up delay-300 bg-blue-50 rounded-3xl shadow-md mt-12">
         <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'About Us' : '关于我们'}</h2>
         <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].about}</p>
       </section>
 
       {/* Founders Section */}
-      <section className="w-full max-w-4xl mx-auto py-16 px-4 animate-fade-in-up delay-400">
+      <section className="w-full max-w-4xl mx-auto py-16 px-4 animate-fade-in-up delay-400 bg-blue-50 rounded-3xl shadow-md mt-12">
         <h2 className="text-3xl font-bold mb-10 text-center">{t[lang as 'en' | 'zh'].founders}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           {/* Founder: Jianfeng Lu */}
@@ -198,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="w-full max-w-2xl mx-auto py-16 px-4 text-center animate-fade-in-up delay-500">
+      <section id="contact" className="w-full max-w-2xl mx-auto py-16 px-4 text-center animate-fade-in-up delay-500 bg-blue-50 rounded-3xl shadow-md mt-12">
         <h2 className="text-3xl font-bold mb-4">{t[lang as 'en' | 'zh'].aiNative}</h2>
         <a
           href="https://chat.whatsapp.com/FYlJZvfse3bIWuDZJZYRWW"
