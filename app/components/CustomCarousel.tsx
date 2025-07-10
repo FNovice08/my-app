@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -5,52 +6,88 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "./ui/carousel";
+import type { CarouselApi } from "./ui/carousel";
 
-const slides = [
+const heroSlides = [
   {
-    label: "LATEST",
-    title: "CNCPT Workshop in Toronto",
-    subtitle:
-      "A two-day workshop and panel with YouTube creators around how AI can fit into their creative lives.",
-    image: "/community.webp",
+    title: "One North Foundation",
+    description: "Advancing AI development in Southeast Asia",
+    button: true,
+    image: "/foundation.png",
+    overlay: "bg-white/70 backdrop-blur-sm",
   },
   {
-    label: "LATEST",
-    title: "CNCPT Workshop in Toronto",
-    subtitle:
-      "A two-day workshop and panel with YouTube creators around how AI can fit into their creative lives.",
-    image: "/community.webp",
+    title: "ITB Arkavidia Hackathon 2025",
+    description: "Empowering the Next Generation of Innovators in Tech and AI",
+    button: false,
+    image: "/Event1.jpg",
+    overlay: "bg-black/30",
   },
-  // Add more slides as needed
+  {
+    title: "The Future Is Built Together",
+    description: "Uniting forward-thinkers across Southeast Asia to scale meaningful AI solutions.",
+    button: false,
+    image: "/Event2.jpeg",
+    overlay: "bg-black/30",
+  },
 ];
 
-export default function CustomCarousel() {
+export default function HeroCarousel() {
+  const [emblaApi, setEmblaApi] = React.useState<CarouselApi | null>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    const interval = setInterval(() => {
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else {
+        emblaApi.scrollTo(0);
+      }
+    }, 10000);
+    return () => {
+      clearInterval(interval);
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
+  const currentSlide = heroSlides[selectedIndex] || heroSlides[0];
+
   return (
-    <div className="w-full flex justify-center py-12 bg-transparent">
-      <Carousel className="w-full max-w-6xl">
+    <div className="w-full min-h-[400px] flex flex-col items-center justify-center relative overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: `url(${currentSlide.image})` }}>
+      <div className={`absolute inset-0 ${currentSlide.overlay}`} aria-hidden="true"></div>
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 py-20">
+        <Carousel className="w-full" opts={{ loop: true, align: 'center' }} setApi={setEmblaApi}>
         <CarouselContent>
-          {slides.map((slide, idx) => (
-            <CarouselItem key={idx}>
-              <div className="flex items-center bg-green-400 rounded-[80px] p-12 min-h-[500px]">
-                <div className="flex-1 flex flex-col justify-center items-start">
-                  <span className="mb-2 text-lg">{slide.label}</span>
-                  <h2 className="text-5xl font-bold mb-4">{slide.title}</h2>
-                  <p className="text-2xl">{slide.subtitle}</p>
-                </div>
-                <div className="flex-1 flex justify-center items-center">
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="rounded-full w-[70%] h-auto object-cover"
-                  />
-                </div>
-              </div>
+            {heroSlides.map((slide, idx) => (
+              <CarouselItem key={idx} className="flex flex-col items-center text-center min-h-[300px] justify-center">
+                <h1 className="text-5xl font-extrabold tracking-tight mb-4 animate-fade-in-up delay-100 text-white drop-shadow-lg">{slide.title}</h1>
+                <p className="text-2xl mb-6 font-medium text-white animate-fade-in-up delay-200 drop-shadow">{slide.description}</p>
+                {slide.button && (
+                  <a
+                    href="#contact"
+                    className="inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition transform hover:scale-105 focus:scale-105 animate-fade-in-up delay-300"
+                  >
+                    Contact Us
+                  </a>
+                )}
             </CarouselItem>
           ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+        {/* Dots navigation */}
+        <div className="flex justify-center mt-6 gap-2">
+          {heroSlides.map((_, idx) => (
+            <span key={idx} className={`w-3 h-3 rounded-full ${selectedIndex === idx ? 'bg-blue-600' : 'bg-blue-300'} inline-block`} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 } 

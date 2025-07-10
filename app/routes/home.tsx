@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import HeroCarousel from "../components/CustomCarousel";
 
 const team = [
   {
@@ -37,104 +38,176 @@ const socialLinks = [
 export function meta() {
   return [
     { title: "One North Foundation" },
-    { name: "description", content: "Advancing AI development in Indonesia." },
+    { name: "description", content: "Advancing AI development in Southeast Asia." },
   ];
 }
 
+type Translation = {
+  nav: { about: string; contact: string };
+  hero: { title: string; subtitle: string; button: string };
+  vision: string;
+  mission: string;
+  about: string;
+  founders: string;
+  founder1: { role: string; name: string; bio: string };
+  founder2: { role: string; name: string; bio: string };
+  aiNative: string;
+  whatsapp: string;
+};
+
 export default function Home() {
+  // Language state and persistence
+  const [lang, setLang] = useState<'en' | 'zh'>("en");
+  useEffect(() => {
+    const storedLang = localStorage.getItem("lang");
+    if (storedLang) setLang(storedLang as 'en' | 'zh');
+  }, []);
+  const handleLangToggle = (l: string) => {
+    setLang(l as 'en' | 'zh');
+    localStorage.setItem("lang", l);
+  };
+
+  // Translations
+  const t: Record<'en' | 'zh', Translation> = {
+    en: {
+      nav: { about: "About Us", contact: "Contact Us" },
+      hero: {
+        title: "One North Foundation",
+        subtitle: "Advancing AI development in Southeast Asia",
+        button: "Contact Us",
+      },
+      vision: "Advancing AI development in Southeast Asia.",
+      mission:
+        "To empower and support startups in Southeast Asia to build innovative AI solutions through mentorship, funding, and a collaborative community.",
+      about:
+        "One North Foundation is dedicated to nurturing the next generation of AI-driven startups in Southeast Asia. We believe in the power of technology to transform lives and are committed to providing resources, guidance, and a vibrant network to help founders turn their ideas into impactful solutions.",
+      founders: "Our Founders",
+      founder1: {
+        role: "Founder",
+        name: "Jianfeng Lu",
+        bio: "Jianfeng Lu is a serial entrepreneur and the co-founder and chairman of WIZ.AI, a leading Generative AI company in Southeast Asia. With a proven track record in building tech ventures, he previously led China R&D at Trend Micro and served as VP at Qihu 360 Inc. Jianfeng is also an active angel investor in enterprise and AI startups across China, the U.S., and Southeast Asia.",
+      },
+      founder2: {
+        role: "Chief Advisor",
+        name: "Hongjiang Zhang",
+        bio: "Dr. Hongjiang Zhang is a renowned computer scientist and executive, recognized as a Fellow of IEEE and ACM. He was elected to the U.S. National Academy of Engineering for his leadership in multimedia computing. Dr. Zhang has held senior roles at Microsoft Research Asia, Kingsoft, and Carlyle Group, and is celebrated for his groundbreaking work in media computing and AI.",
+      },
+      aiNative: "Become an AI-Native",
+      whatsapp: "Get the latest AI news and learn how to apply it in your work",
+    },
+    zh: {
+      nav: { about: "关于我们", contact: "联系我们" },
+      hero: {
+        title: "一北基金会",
+        subtitle: "推动东南亚人工智能发展",
+        button: "联系我们",
+      },
+      vision: "推动东南亚人工智能发展。",
+      mission:
+        "通过指导、资金和协作社区，赋能并支持东南亚初创企业构建创新的人工智能解决方案。",
+      about:
+        "一北基金会致力于培养东南亚新一代以人工智能为驱动的初创企业。我们相信科技改变生活的力量，并致力于为创始人提供资源、指导和充满活力的网络，帮助他们将想法转化为有影响力的解决方案。",
+      founders: "我们的创始人",
+      founder1: {
+        role: "创始人",
+        name: "吕建峰",
+        bio: "吕建峰是一位连续创业者，WIZ.AI的联合创始人兼董事长，东南亚领先的生成式AI公司。他曾任趋势科技中国研发负责人和奇虎360副总裁，并活跃于中美及东南亚的企业服务和AI初创公司投资。",
+      },
+      founder2: {
+        role: "首席顾问",
+        name: "张宏江",
+        bio: "张宏江博士是著名计算机科学家和企业高管，美国工程院院士，IEEE和ACM会士。曾任微软亚洲研究院、金山软件、凯雷集团等高管，因其在多媒体计算和人工智能领域的领导力和突破性工作而享誉业界。",
+      },
+      aiNative: "成为AI原住民",
+      whatsapp: "获取最新AI资讯，学习如何将其应用于您的工作",
+    },
+  };
+
   return (
     <main className="bg-white min-h-screen text-gray-900">
+      {/* Language Toggle */}
+      <div className="absolute right-0 top-0 z-50 p-4">
+        <button
+          className={`font-semibold px-3 py-1 rounded ${lang === "en" ? "bg-blue-100 text-blue-700" : ""}`}
+          onClick={() => handleLangToggle("en")}
+        >
+          EN
+        </button>
+        <span className="mx-1">|</span>
+        <button
+          className={`font-semibold px-3 py-1 rounded ${lang === "zh" ? "bg-blue-100 text-blue-700" : ""}`}
+          onClick={() => handleLangToggle("zh")}
+        >
+          中文
+        </button>
+      </div>
       {/* Navbar */}
       <nav className="sticky top-0 z-50 w-full bg-white rounded-b-2xl border-b-2 border-blue-100 shadow-lg animate-fade-in-down">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between min-h-[72px]">
           <div className="flex items-center gap-4">
             <img src="/Foundation Logo.png" alt="Foundation Logo" className="h-12 w-12 object-contain" />
-            <span className="font-bold text-2xl tracking-tight text-blue-700">One North Foundation</span>
+            <span className="font-bold text-2xl tracking-tight" style={{ color: "#FF8C00" }}>One North Foundation</span>
           </div>
           <div className="space-x-8">
-            <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">About Us</a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">Contact Us</a>
+            <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.about}</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.contact}</a>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section
-        className="w-full py-20 px-4 flex flex-col items-center text-center relative min-h-[400px] overflow-hidden animate-fade-in-up"
-      >
-        <div
-          className="absolute inset-0"
-          style={{ backgroundImage: 'url(/foundation.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" aria-hidden="true"></div>
-        <div className="relative z-10 flex flex-col items-center">
-          <h1 className="text-5xl font-extrabold tracking-tight mb-4 animate-fade-in-up delay-100">One North Foundation</h1>
-          <p className="text-2xl mb-6 font-medium text-gray-700 animate-fade-in-up delay-200">Advancing AI development in Indonesia</p>
-          <a
-            href="#contact"
-            className="inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition transform hover:scale-105 focus:scale-105 animate-fade-in-up delay-300"
-          >
-            Contact Us
-          </a>
-        </div>
-      </section>
+      {/* Hero Section (Carousel) */}
+      <HeroCarousel />
 
       {/* Vision & Mission */}
-      <section className="w-full max-w-4xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 animate-fade-in-up delay-200">
+      <section className="w-full max-w-4xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 animate-fade-in-up delay-200 text-center">
         <div>
-          <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
-          <p className="text-lg text-gray-700">Advancing AI development in Indonesia.</p>
+          <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'Our Vision' : '我们的愿景'}</h2>
+          <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].vision}</p>
         </div>
         <div>
-          <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-          <p className="text-lg text-gray-700">To empower and support startups in Indonesia to build innovative AI solutions through mentorship, funding, and a collaborative community.</p>
+          <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'Our Mission' : '我们的使命'}</h2>
+          <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].mission}</p>
         </div>
       </section>
 
       {/* About Us */}
       <section id="about" className="w-full max-w-3xl mx-auto py-12 px-4 text-center animate-fade-in-up delay-300">
-        <h2 className="text-3xl font-bold mb-4">About Us</h2>
-        <p className="text-lg text-gray-700">One North Foundation is dedicated to nurturing the next generation of AI-driven startups in Indonesia. We believe in the power of technology to transform lives and are committed to providing resources, guidance, and a vibrant network to help founders turn their ideas into impactful solutions.</p>
+        <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'About Us' : '关于我们'}</h2>
+        <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].about}</p>
       </section>
 
-      {/* Team Section */}
-      <section className="w-full max-w-6xl mx-auto py-16 px-4 animate-fade-in-up delay-400">
-        <h2 className="text-3xl font-bold mb-10 text-center">Our Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
-          {team.map((member) => (
-            <div
-              key={member.name}
-              className="flex flex-col items-center bg-white rounded-xl shadow p-6 w-full max-w-xs transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in-up"
-            >
-              <img src={member.photo} alt={member.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-200 transition-transform duration-200 hover:scale-105" />
-              <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-              <p className="text-gray-600">{member.role}</p>
-            </div>
-          ))}
+      {/* Founders Section */}
+      <section className="w-full max-w-4xl mx-auto py-16 px-4 animate-fade-in-up delay-400">
+        <h2 className="text-3xl font-bold mb-10 text-center">{t[lang as 'en' | 'zh'].founders}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Founder: Jianfeng Lu */}
+          <div className="flex flex-col items-center text-center">
+            <img src="/Jianfeng Lu.jpeg" alt="Jianfeng Lu" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
+            <h3 className="text-xl font-bold mb-1">{t[lang as 'en' | 'zh'].founder1.role}</h3>
+            <h4 className="text-lg font-semibold mb-4">{t[lang as 'en' | 'zh'].founder1.name}</h4>
+            <p className="text-gray-700 text-base">{t[lang as 'en' | 'zh'].founder1.bio}</p>
+          </div>
+          {/* Chief Advisor: Hongjiang Zhang */}
+          <div className="flex flex-col items-center text-center">
+            <img src="/Hongjiang.jpeg" alt="Hongjiang Zhang" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
+            <h3 className="text-xl font-bold mb-1">{t[lang as 'en' | 'zh'].founder2.role}</h3>
+            <h4 className="text-lg font-semibold mb-4">{t[lang as 'en' | 'zh'].founder2.name}</h4>
+            <p className="text-gray-700 text-base">{t[lang as 'en' | 'zh'].founder2.bio}</p>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
       <section id="contact" className="w-full max-w-2xl mx-auto py-16 px-4 text-center animate-fade-in-up delay-500">
-        <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-        <p className="text-lg text-gray-700 mb-6">Interested in collaborating or learning more? Reach out to us through our social channels below!</p>
-        <div className="flex justify-center gap-6 mb-4">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-blue-600 transition-transform duration-200 hover:scale-110"
-              aria-label={link.name}
-            >
-              <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                <path d={link.icon} />
-              </svg>
-            </a>
-          ))}
-        </div>
+        <h2 className="text-3xl font-bold mb-4">{t[lang as 'en' | 'zh'].aiNative}</h2>
+        <a
+          href="https://chat.whatsapp.com/FYlJZvfse3bIWuDZJZYRWW"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition transform hover:scale-105 focus:scale-105"
+        >
+          {t[lang as 'en' | 'zh'].whatsapp}
+        </a>
       </section>
     </main>
   );
