@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import HeroCarousel from "../components/CustomCarousel";
 import { NewsletterForm } from "./news";
 import { useLanguage } from "../components/LanguageContext";
+import LightBulbIcon from '@heroicons/react/24/solid/LightBulbIcon';
+import RocketLaunchIcon from '@heroicons/react/24/solid/RocketLaunchIcon';
+import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 
 const team = [
   {
@@ -124,56 +127,68 @@ export default function Home() {
         <HeroCarousel />
       </div>
 
-      {/* Vision & Mission */}
-      <section className="w-full max-w-4xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 animate-fade-in-up delay-200 text-center bg-blue-50 rounded-3xl shadow-md">
-        <div>
-          <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'Our Vision' : '我们的愿景'}</h2>
-          <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].vision}</p>
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'Our Mission' : '我们的使命'}</h2>
-          <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].mission}</p>
-        </div>
-      </section>
-
-      {/* About Us */}
-      <section id="about" className="w-full max-w-3xl mx-auto py-12 px-4 text-center animate-fade-in-up delay-300 bg-blue-50 rounded-3xl shadow-md mt-12">
-        <h2 className="text-3xl font-bold mb-4">{lang === 'en' ? 'About Us' : '关于我们'}</h2>
-        <p className="text-lg text-gray-700">{t[lang as 'en' | 'zh'].about}</p>
-      </section>
-
-      {/* Founders Section */}
-      <section className="w-full max-w-4xl mx-auto py-16 px-4 animate-fade-in-up delay-400 bg-blue-50 rounded-3xl shadow-md mt-12">
-        <h2 className="text-3xl font-bold mb-10 text-center">{t[lang as 'en' | 'zh'].founders}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {/* Founder: Jianfeng Lu */}
-          <div className="flex flex-col items-center text-center">
-            <img src="/Jianfeng Lu.jpeg" alt="Jianfeng Lu" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
-            <h3 className="text-xl font-bold mb-1">{t[lang as 'en' | 'zh'].founder1.role}</h3>
-            <h4 className="text-lg font-semibold mb-4">{t[lang as 'en' | 'zh'].founder1.name}</h4>
-            <p className="text-gray-700 text-base">{t[lang as 'en' | 'zh'].founder1.bio}</p>
+      {/* Vision & Mission section (lighter blue gradient with white overlay) */}
+      <section className="w-full bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 py-16 relative">
+        <div className="absolute inset-0 bg-white/60 pointer-events-none" style={{zIndex:1}}></div>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 px-4 relative z-10">
+          <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
+            <LightBulbIcon className="h-14 w-14 text-blue-400 mb-4" />
+            <h2 className="text-3xl font-bold mb-2 text-blue-900">{lang === 'en' ? 'Our Vision' : '我们的愿景'}</h2>
+            <p className="text-lg text-gray-700 text-center">{t[lang as 'en' | 'zh'].vision}</p>
           </div>
-          {/* Chief Advisor: Hongjiang Zhang */}
-          <div className="flex flex-col items-center text-center">
-            <img src="/Hongjiang.jpeg" alt="Hongjiang Zhang" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
-            <h3 className="text-xl font-bold mb-1">{t[lang as 'en' | 'zh'].founder2.role}</h3>
-            <h4 className="text-lg font-semibold mb-4">{t[lang as 'en' | 'zh'].founder2.name}</h4>
-            <p className="text-gray-700 text-base">{t[lang as 'en' | 'zh'].founder2.bio}</p>
+          <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
+            <RocketLaunchIcon className="h-14 w-14 text-blue-500 mb-4" />
+            <h2 className="text-3xl font-bold mb-2 text-blue-900">{lang === 'en' ? 'Our Mission' : '我们的使命'}</h2>
+            <p className="text-lg text-gray-700 text-center">{t[lang as 'en' | 'zh'].mission}</p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="w-full max-w-2xl mx-auto py-16 px-4 text-center animate-fade-in-up delay-500 bg-blue-50 rounded-3xl shadow-md mt-12">
-        <h2 className="text-3xl font-bold mb-4">{t[lang as 'en' | 'zh'].aiNative}</h2>
-        <a
-          href="https://chat.whatsapp.com/FYlJZvfse3bIWuDZJZYRWW"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition transform hover:scale-105 focus:scale-105"
-        >
-          {t[lang as 'en' | 'zh'].whatsapp}
-        </a>
+      {/* About Us section (white background) */}
+      <section id="about" className="w-full bg-white py-16 mt-12">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
+          <UsersIcon className="h-16 w-16 text-blue-500 mb-4" />
+          <h2 className="text-3xl font-bold mb-2 text-blue-900">{lang === 'en' ? 'About Us' : '关于我们'}</h2>
+          <p className="text-lg text-gray-700 text-center">{t[lang as 'en' | 'zh'].about}</p>
+        </div>
+      </section>
+
+      {/* Founders Section (gray background) */}
+      <section className="w-full bg-gray-50 py-16 mt-12">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-10 border border-blue-100">
+          <h2 className="text-3xl font-bold mb-10 text-center text-blue-900">{t[lang as 'en' | 'zh'].founders}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            {/* Founder: Jianfeng Lu */}
+            <div className="flex flex-col items-center text-center">
+              <img src="/Jianfeng Lu.jpeg" alt="Jianfeng Lu" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
+              <h3 className="text-xl font-bold mb-1 text-blue-900">{t[lang as 'en' | 'zh'].founder1.role}</h3>
+              <h4 className="text-lg font-semibold mb-4 text-blue-900">{t[lang as 'en' | 'zh'].founder1.name}</h4>
+              <p className="text-gray-700 text-base text-center">{t[lang as 'en' | 'zh'].founder1.bio}</p>
+            </div>
+            {/* Chief Advisor: Hongjiang Zhang */}
+            <div className="flex flex-col items-center text-center">
+              <img src="/Hongjiang.jpeg" alt="Hongjiang Zhang" className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
+              <h3 className="text-xl font-bold mb-1 text-blue-900">{t[lang as 'en' | 'zh'].founder2.role}</h3>
+              <h4 className="text-lg font-semibold mb-4 text-blue-900">{t[lang as 'en' | 'zh'].founder2.name}</h4>
+              <p className="text-gray-700 text-base text-center">{t[lang as 'en' | 'zh'].founder2.bio}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section (white background) */}
+      <section id="contact" className="w-full bg-white py-16 mt-12">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
+          <h2 className="text-3xl font-bold mb-4 text-blue-900">{t[lang as 'en' | 'zh'].aiNative}</h2>
+          <a
+            href="https://chat.whatsapp.com/FYlJZvfse3bIWuDZJZYRWW"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-10 py-4 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white rounded-full font-bold shadow-xl hover:scale-110 hover:shadow-2xl transition-transform duration-300 text-lg border-4 border-white mt-4"
+          >
+            {t[lang as 'en' | 'zh'].whatsapp}
+          </a>
+        </div>
       </section>
       {/* Footer (full width, content centered) */}
       <footer className="w-full bg-blue-50 mt-16 mb-0 px-0 py-12 text-gray-900 border-t border-blue-100">
