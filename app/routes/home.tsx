@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeroCarousel from "../components/CustomCarousel";
+import { NewsletterForm } from "./news";
+import { useLanguage } from "../components/LanguageContext";
 
 const team = [
   {
@@ -56,16 +58,8 @@ type Translation = {
 };
 
 export default function Home() {
-  // Language state and persistence
-  const [lang, setLang] = useState<'en' | 'zh'>("en");
-  useEffect(() => {
-    const storedLang = localStorage.getItem("lang");
-    if (storedLang) setLang(storedLang as 'en' | 'zh');
-  }, []);
-  const handleLangToggle = (l: string) => {
-    setLang(l as 'en' | 'zh');
-    localStorage.setItem("lang", l);
-  };
+  // Use global language context
+  const { lang } = useLanguage();
 
   // Translations
   const t: Record<'en' | 'zh', Translation> = {
@@ -98,7 +92,7 @@ export default function Home() {
     zh: {
       nav: { about: "关于我们", contact: "联系我们" },
       hero: {
-        title: "一北基金会",
+        title: "One North Foundation",
         subtitle: "推动东南亚人工智能发展",
         button: "联系我们",
       },
@@ -106,17 +100,17 @@ export default function Home() {
       mission:
         "通过指导、资金和协作社区，赋能并支持东南亚初创企业构建创新的人工智能解决方案。",
       about:
-        "一北基金会致力于培养东南亚新一代以人工智能为驱动的初创企业。我们相信科技改变生活的力量，并致力于为创始人提供资源、指导和充满活力的网络，帮助他们将想法转化为有影响力的解决方案。",
-      founders: "我们的创始人",
+        "One North Foundation 致力于培养东南亚新一代以人工智能为驱动的初创企业。我们相信科技改变生活的力量，并致力于为创始人提供资源、指导和充满活力的网络，帮助他们将想法转化为有影响力的解决方案。",
+      founders: "创始团队",
       founder1: {
         role: "创始人",
-        name: "吕建峰",
-        bio: "吕建峰是一位连续创业者，WIZ.AI的联合创始人兼董事长，东南亚领先的生成式AI公司。他曾任趋势科技中国研发负责人和奇虎360副总裁，并活跃于中美及东南亚的企业服务和AI初创公司投资。",
+        name: "陆剑锋",
+        bio: `陆剑锋是东南亚人工智能赛道的先行者之一，也是生成式AI商业化落地的重要推动者。作为 WIZ.AI 的联合创始人兼董事长，陆剑锋致力于将AI能力融入企业服务，赋能区域数字化升级。在创立WIZ.AI之前，陆剑锋曾领导 Trend Micro 在中国的研发体系，并出任奇虎360副总裁，长期专注于网络安全与人工智能的结合应用。\n\n陆剑锋不仅深耕技术领域，更活跃于创投生态，长期关注中美及东南亚的AI初创项目。无论是在构建技术团队，还是在推动资本与技术之间的联动上，陆剑锋始终以清晰的产业判断力和务实的执行力，持续为AI行业注入长期价值。`,
       },
       founder2: {
         role: "首席顾问",
-        name: "张宏江",
-        bio: "张宏江博士是著名计算机科学家和企业高管，美国工程院院士，IEEE和ACM会士。曾任微软亚洲研究院、金山软件、凯雷集团等高管，因其在多媒体计算和人工智能领域的领导力和突破性工作而享誉业界。",
+        name: "张洪江",
+        bio: `张洪江博士是全球计算机科学界公认的权威之一，在多媒体计算与人工智能领域拥有深远影响。作为IEEE与ACM会士，以及美国国家工程院院士，张洪江博士的技术贡献已被国际同行广泛认可。长期以来，张洪江博士致力于将前沿科技转化为产业应用，其领导的研究曾深刻影响全球AI算法与系统的发展路径。\n\n张洪江博士曾先后担任微软亚洲研究院、金山软件及凯雷投资集团的高级管理职位，是少数兼具科研厚度与商业视野的技术领导者。在人工智能走向产业化的关键阶段，张洪江博士持续扮演桥梁角色，推动技术、市场与资本的深度融合。张洪江博士对未来科技趋势的前瞻判断，至今仍被众多企业与研究机构视为重要参考。`,
       },
       aiNative: "成为AI原住民",
       whatsapp: "获取最新AI资讯，学习如何将其应用于您的工作",
@@ -125,37 +119,6 @@ export default function Home() {
 
   return (
     <main className="bg-white min-h-screen text-gray-900">
-      {/* Language Toggle */}
-      <div className="absolute right-0 top-0 z-50 p-4">
-        <button
-          className={`font-semibold px-3 py-1 rounded ${lang === "en" ? "bg-blue-100 text-blue-700" : ""}`}
-          onClick={() => handleLangToggle("en")}
-        >
-          EN
-        </button>
-        <span className="mx-1">|</span>
-        <button
-          className={`font-semibold px-3 py-1 rounded ${lang === "zh" ? "bg-blue-100 text-blue-700" : ""}`}
-          onClick={() => handleLangToggle("zh")}
-        >
-          中文
-        </button>
-      </div>
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 w-full bg-white rounded-b-2xl border-b-2 border-blue-100 shadow-lg animate-fade-in-down">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between min-h-[72px]">
-          <div className="flex items-center gap-4">
-            <img src="/Foundation Logo.png" alt="Foundation Logo" className="h-12 w-12 object-contain" />
-            <span className="font-bold text-2xl tracking-tight" style={{ color: "#FF8C00" }}>One North Foundation</span>
-          </div>
-          <div className="space-x-8">
-            <a href="/news" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">News</a>
-            <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.about}</a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.contact}</a>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section (Carousel) */}
       <div className="bg-white">
         <HeroCarousel />
@@ -212,6 +175,30 @@ export default function Home() {
           {t[lang as 'en' | 'zh'].whatsapp}
         </a>
       </section>
+      {/* Footer (full width, content centered) */}
+      <footer className="w-full bg-blue-50 mt-16 mb-0 px-0 py-12 text-gray-900 border-t border-blue-100">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-8">
+          <div className="flex items-center gap-4 mb-6 md:mb-0">
+            <img src="/Foundation Logo.png" alt="One North Foundation Logo" className="h-20 w-20 object-contain" />
+            <div>
+              <h3 className="font-bold text-xl">One North Foundation</h3>
+              <p className="text-gray-700 text-lg mt-1 whitespace-nowrap">
+                Grow together and become an AI-Native
+              </p>
+            </div>
+          </div>
+          <NewsletterForm />
+        </div>
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center mt-8 border-t border-blue-100 pt-6 text-sm text-gray-500">
+          <div className="mb-2 md:mb-0">© {new Date().getFullYear()} One North Foundation</div>
+          <div className="flex gap-6">
+            <a href="/" className="hover:underline">Home</a>
+            <a href="/news" className="hover:underline">News</a>
+            <a href="#" className="hover:underline">Privacy Policy</a>
+            <a href="#" className="hover:underline">Terms of Use</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

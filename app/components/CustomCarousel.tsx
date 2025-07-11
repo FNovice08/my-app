@@ -7,32 +7,34 @@ import {
   CarouselNext,
 } from "./ui/carousel";
 import type { CarouselApi } from "./ui/carousel";
+import { useLanguage } from "./LanguageContext";
 
 const heroSlides = [
   {
-    title: "One North Foundation",
-    description: "Advancing AI development in Southeast Asia",
+    title: { en: "One North Foundation", zh: "One North Foundation" },
+    description: { en: "Advancing AI development in Southeast Asia", zh: "推动东南亚人工智能发展" },
     button: true,
+    buttonText: { en: "Contact Us", zh: "联系我们" },
     image: "/foundation.png",
     overlay: "bg-white/70 backdrop-blur-sm",
   },
   {
-    title: "ITB Arkavidia Hackathon 2025",
-    description: "Empowering the Next Generation of Innovators in Tech and AI",
+    title: { en: "ITB Arkavidia Hackathon 2025", zh: "ITB Arkavidia 黑客松 2025" },
+    description: { en: "Empowering the Next Generation of Innovators in Tech and AI", zh: "赋能新一代科技与人工智能创新者" },
     button: false,
     image: "/Event1.jpg",
     overlay: "bg-black/30",
   },
   {
-    title: "The Future Is Built Together",
-    description: "Uniting forward-thinkers across Southeast Asia to scale meaningful AI solutions.",
+    title: { en: "The Future Is Built Together", zh: "共创未来" },
+    description: { en: "Uniting forward-thinkers across Southeast Asia to scale meaningful AI solutions.", zh: "汇聚东南亚前瞻思想者，共同推动有意义的AI解决方案。" },
     button: false,
     image: "/Event2.jpeg",
     overlay: "bg-black/30",
   },
   {
-    title: "AI for Good Summit",
-    description: "Exploring the impact of artificial intelligence on society and the future.",
+    title: { en: "AI for Good Summit", zh: "AI公益峰会" },
+    description: { en: "Exploring the impact of artificial intelligence on society and the future.", zh: "探讨人工智能对社会与未来的影响。" },
     button: false,
     image: "/Event3.jpg",
     overlay: "bg-black/30",
@@ -40,6 +42,7 @@ const heroSlides = [
 ];
 
 export default function HeroCarousel() {
+  const { lang } = useLanguage();
   const [emblaApi, setEmblaApi] = React.useState<CarouselApi | null>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -72,14 +75,14 @@ export default function HeroCarousel() {
         <CarouselContent>
             {heroSlides.map((slide, idx) => (
               <CarouselItem key={idx} className="flex flex-col items-center text-center min-h-[300px] justify-center">
-                <h1 className="text-5xl font-extrabold tracking-tight mb-4 animate-fade-in-up delay-100 text-white drop-shadow-lg">{slide.title}</h1>
-                <p className="text-2xl mb-6 font-medium text-white animate-fade-in-up delay-200 drop-shadow">{slide.description}</p>
+                <h1 className="text-5xl font-extrabold tracking-tight mb-4 animate-fade-in-up delay-100 text-white drop-shadow-lg">{slide.title[lang]}</h1>
+                <p className="text-2xl mb-6 font-medium text-white animate-fade-in-up delay-200 drop-shadow">{slide.description[lang]}</p>
                 {slide.button && (
                   <a
                     href="#contact"
                     className="inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition transform hover:scale-105 focus:scale-105 animate-fade-in-up delay-300"
                   >
-                    Contact Us
+                    {slide.buttonText ? slide.buttonText[lang] : "Contact Us"}
                   </a>
                 )}
             </CarouselItem>
