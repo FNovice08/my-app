@@ -149,6 +149,7 @@ export default function Home() {
             <span className="font-bold text-2xl tracking-tight" style={{ color: "#FF8C00" }}>One North Foundation</span>
           </div>
           <div className="space-x-8">
+            <a href="/news" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">News</a>
             <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.about}</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition rounded px-3 py-2">{t[lang as 'en' | 'zh'].nav.contact}</a>
           </div>
