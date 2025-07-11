@@ -82,12 +82,12 @@ export default function Home() {
       founder1: {
         role: "Founder",
         name: "Jianfeng Lu",
-        bio: "Jianfeng Lu is a serial entrepreneur and the co-founder and chairman of WIZ.AI, a leading Generative AI company in Southeast Asia. With a proven track record in building tech ventures, he previously led China R&D at Trend Micro and served as VP at Qihu 360 Inc. Jianfeng is also an active angel investor in enterprise and AI startups across China, the U.S., and Southeast Asia.",
+        bio: "Jianfeng Lu is the co-founder and chairman of WIZ.AI, driving the adoption of Generative AI across Southeast Asia. Previously led China R&D at Trend Micro and served as VP at Qihoo 360. As a serial entrepreneur and active angel investor, Jianfeng Lu plays a key role in the AI and enterprise tech ecosystems across China, Southeast Asia, and the U.S.",
       },
       founder2: {
         role: "Chief Advisor",
         name: "Hongjiang Zhang",
-        bio: "Dr. Hongjiang Zhang is a renowned computer scientist and executive, recognized as a Fellow of IEEE and ACM. He was elected to the U.S. National Academy of Engineering for his leadership in multimedia computing. Dr. Zhang has held senior roles at Microsoft Research Asia, Kingsoft, and Carlyle Group, and is celebrated for his groundbreaking work in media computing and AI.",
+        bio: "Dr. Hongjiang Zhang is a globally recognized computer scientist, Fellow of IEEE and ACM, and a member of the U.S. National Academy of Engineering. Held senior leadership roles at Microsoft Research Asia, Kingsoft, and Carlyle Group. Dr. Hongjiang Zhang is widely known for pioneering contributions to multimedia computing and the advancement of applied AI.",
       },
       aiNative: "Become an AI-Native",
       whatsapp: "Get the latest AI news and learn how to apply it in your work",
