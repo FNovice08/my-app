@@ -19,7 +19,7 @@ const heroSlides = [
     overlay: "bg-white/70 backdrop-blur-sm",
   },
   {
-    title: { en: "ITB Arkavidia Hackathon 2025", zh: "ITB Arkavidia 黑客松 2025" },
+    title: { en: "ITB Arkavidia Hackathon 2025", zh: "ITB Arkavidia Hackathon 2025" },
     description: { en: "Empowering the Next Generation of Innovators in Tech and AI", zh: "赋能新一代科技与人工智能创新者" },
     button: false,
     image: "/Event1.jpg",
