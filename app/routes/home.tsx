@@ -132,12 +132,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/60 pointer-events-none" style={{zIndex:1}}></div>
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 px-4 relative z-10">
           <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
-            <LightBulbIcon className="h-14 w-14 text-blue-400 mb-4" />
+            <span className="transition duration-300 drop-shadow-lg">
+              <LightBulbIcon className="h-14 w-14 text-blue-400 mb-4" />
+            </span>
             <h2 className="text-3xl font-bold mb-2 text-blue-900">{lang === 'en' ? 'Our Vision' : '我们的愿景'}</h2>
             <p className="text-lg text-gray-700 text-center">{t[lang as 'en' | 'zh'].vision}</p>
           </div>
           <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-blue-100">
-            <RocketLaunchIcon className="h-14 w-14 text-blue-500 mb-4" />
+            <span className="transition duration-300 drop-shadow-lg">
+              <RocketLaunchIcon className="h-14 w-14 text-blue-500 mb-4" />
+            </span>
             <h2 className="text-3xl font-bold mb-2 text-blue-900">{lang === 'en' ? 'Our Mission' : '我们的使命'}</h2>
             <p className="text-lg text-gray-700 text-center">{t[lang as 'en' | 'zh'].mission}</p>
           </div>
