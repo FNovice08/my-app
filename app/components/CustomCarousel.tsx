@@ -32,13 +32,6 @@ const heroSlides = [
     image: "/Event2.jpeg",
     overlay: "bg-black/30",
   },
-  {
-    title: { en: "AI for Good Summit", zh: "AI公益峰会" },
-    description: { en: "Exploring the impact of artificial intelligence on society and the future.", zh: "探讨人工智能对社会与未来的影响。" },
-    button: false,
-    image: "/Event3.jpg",
-    overlay: "bg-black/30",
-  },
 ];
 
 export default function HeroCarousel() {
